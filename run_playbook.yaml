@@ -1,0 +1,4 @@
+---
+- import_playbook: "playbooks/bootstrap.yaml"
+  vars:
+    hosts: util-01

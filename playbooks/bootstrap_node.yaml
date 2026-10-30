@@ -1,0 +1,21 @@
+---
+- name: Bootstrap Node
+  hosts: "{{ hosts | default(omit) }}"
+  serial: "{{ application_serial | default(1) }}"
+  become: yes
+  tasks:
+    - name: Configure SSHD
+      include_role:
+        name: sshd
+
+    - name: Set a hostname
+      hostname:
+        name: "{{ hostname }}"
+    
+    - name: Configure Netplan
+      include_role:
+        name: netplan
+
+    - name: Add DNS to mikrotik
+      include_role:
+        name: routeros
